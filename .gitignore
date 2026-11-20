@@ -1,0 +1,13 @@
+.DS_Store
+build/
+.build/
+.swiftpm/
+DerivedData/
+*.xcodeproj
+xcuserdata/
+*.log
+
+# Vendor build output (rebuilt via `make vendor`); keep license texts.
+Packages/PGKit/Vendor/CLibPQ.xcframework/
+Packages/PGKit/Vendor/.versions
+.omc/

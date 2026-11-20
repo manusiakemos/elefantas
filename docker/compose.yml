@@ -1,0 +1,33 @@
+# Test servers for `make itest`. All share user/password/db = elefantas.
+x-pg-env: &pg-env
+  POSTGRES_USER: elefantas
+  POSTGRES_PASSWORD: elefantas
+  POSTGRES_DB: elefantas
+
+x-health: &health
+  test: ["CMD-SHELL", "pg_isready -U elefantas -d elefantas"]
+  interval: 2s
+  timeout: 3s
+  retries: 30
+
+services:
+  pg17:
+    image: postgres:17
+    environment: *pg-env
+    ports: ["54317:5432"]
+    volumes: ["./seed:/docker-entrypoint-initdb.d:ro"]
+    healthcheck: *health
+
+  pg18:
+    image: postgres:18
+    environment: *pg-env
+    ports: ["54318:5432"]
+    volumes: ["./seed:/docker-entrypoint-initdb.d:ro"]
+    healthcheck: *health
+
+  timescale:
+    image: timescale/timescaledb-ha:pg17
+    environment: *pg-env
+    ports: ["54319:5432"]
+    volumes: ["./seed:/docker-entrypoint-initdb.d:ro"]
+    healthcheck: *health
