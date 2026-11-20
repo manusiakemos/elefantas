@@ -1,6 +1,6 @@
 # Elefantas
 
-Native macOS client for PostgreSQL and TimescaleDB (Swift), with Sequel Ace-style UX. The PRD is in `docs/PRD.md` and the Phase 1 plan is in `docs/plan-phase1.md`.
+Native macOS client for PostgreSQL and TimescaleDB (Swift), with Sequel Ace-style UX. The PRD is in `docs/PRD.md`, the Phase 1 plan is in `docs/plan-phase1.md`, and the **next work list is in `docs/NEXT.md`**. Tick items there as they are done.
 
 ## Rules
 1. **Read `MEMORY.md` at the start of every session before doing anything.** Never contradict a logged decision without flagging it first.

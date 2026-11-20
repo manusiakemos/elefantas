@@ -18,6 +18,10 @@ public struct PostgresDialect: Sendable {
 
     // MARK: - Catalog
 
+    public func serverVersion() -> SQLStatement {
+        SQLStatement("SHOW server_version")
+    }
+
     public func listDatabases() -> SQLStatement {
         SQLStatement("""
             SELECT datname FROM pg_catalog.pg_database

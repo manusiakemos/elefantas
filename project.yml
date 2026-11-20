@@ -1,0 +1,53 @@
+name: Elefantas
+options:
+  bundleIdPrefix: id.elefantas
+  deploymentTarget:
+    macOS: "15.0"
+  createIntermediateGroups: true
+  developmentLanguage: en
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MACOSX_DEPLOYMENT_TARGET: "15.0"
+
+packages:
+  ElefantasCore:
+    path: Packages/ElefantasCore
+
+targets:
+  Elefantas:
+    type: application
+    platform: macOS
+    sources:
+      - path: App
+    dependencies:
+      - package: ElefantasCore
+    settings:
+      base:
+        PRODUCT_NAME: Elefantas
+        PRODUCT_BUNDLE_IDENTIFIER: id.elefantas.app
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Elefantas
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.developer-tools
+        INFOPLIST_KEY_NSHumanReadableCopyright: ""
+        # Not sandboxed (system ssh tunnel); hardened runtime for Developer ID notarization.
+        ENABLE_HARDENED_RUNTIME: YES
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_IDENTITY: "-"
+        SWIFT_STRICT_CONCURRENCY: complete
+        LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+        SWIFT_EMIT_LOC_STRINGS: YES
+        ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
+
+schemes:
+  Elefantas:
+    build:
+      targets:
+        Elefantas: all
+    run:
+      config: Debug
+    archive:
+      config: Release

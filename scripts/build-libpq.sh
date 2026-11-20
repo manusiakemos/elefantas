@@ -123,6 +123,7 @@ for h in libpq-fe.h libpq-events.h postgres_ext.h pg_config_ext.h; do
 done
 cat > "$UNI/include/CLibPQ.h" <<'EOF'
 #include "libpq-fe.h"
+#include "libpq-events.h"
 EOF
 cat > "$UNI/include/module.modulemap" <<'EOF'
 module CLibPQ {

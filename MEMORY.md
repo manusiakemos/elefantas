@@ -59,3 +59,23 @@
 **What was decided:** `PostgresDialect` is a concrete struct of pure SQL-building functions. `Catalog` executes them.
 **Why:** Only one dialect exists, so a protocol adds indirection for nothing. Timescale queries will be added as a separate extension or struct in Phase 3.
 **What was rejected:** A `protocol Dialect` as sketched in the plan (YAGNI).
+
+## 2026-11-20, Public GitHub repo
+**What was decided:** The code is published at https://github.com/manusiakemos/elefantas (public), on branch `main`.
+**Why:** The user's choice, in line with the PRD goal of being free and open source.
+**What was rejected:** Private for now. Note that there is no LICENSE file yet (the PRD question is still open), so legally nobody can reuse the code until one is added.
+
+## 2026-11-20, MVP UI simplifications vs. plan
+**What was decided:** (1) Favorites are a flat, reorderable list with color tags, no groups. (2) Add Row uses a sheet with one field per column (empty = default, NULL checkbox) instead of an inline draft row. (3) Cmd+T opens a new connection window and merges it as a native tab (`addTabbedWindow`). (4) One PGConnection per window, shared by the sidebar and Content (its serial queue orders the work).
+**Why:** Each is the smallest thing that delivers the PRD use case. An inline draft row in NSTableView needs much more state handling, and groups are not needed for the first daily use.
+**What was rejected:** Favorite groups (later, if needed). An inline draft row (could come with Phase 2 type editors). A separate connection for the sidebar (more server sessions, little benefit yet).
+
+## 2026-11-20, App depends only on ElefantasCore
+**What was decided:** The App target links only ElefantasCore. PGKit types the UI needs are re-exported as typealiases (`SSLMode`) in `ElefantasCore/Connection/Reexports.swift`.
+**Why:** Keeps the layer rule App → Core → PGKit enforceable.
+**What was rejected:** `@_exported import PGKit` (leaks all of libpq's wrapper into the UI). Linking PGKit directly in the app.
+
+## 2026-11-20, License: MIT
+**What was decided:** Elefantas is licensed under MIT (Copyright (c) 2026 Hafiz Nugraha). Bundled third-party licenses are listed in `THIRD_PARTY_NOTICES.md`.
+**Why:** The user's choice. It matches the MIT-style license of Sequel Ace, is permissive, and is compatible with libpq (PostgreSQL License) and OpenSSL (Apache 2.0).
+**What was rejected:** Apache-2.0 or GPL (not needed; GPL would hinder reuse). Staying unlicensed (the repo is public, so nobody could legally reuse it).
